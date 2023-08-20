@@ -1,0 +1,19 @@
+{
+  "name": "epq-website-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "server": "npx tsc && node dist/main.js",
+    "test": "node test.js"
+  },
+  "author": "Joel Robinson",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^20.4.5",
+    "typescript": "^5.1.6"
+  },
+  "dependencies": {
+    "node-fetch": "2.0"
+  }
+}
