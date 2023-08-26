@@ -21,8 +21,6 @@ export function loginListener(req: http.IncomingMessage, res: http.ServerRespons
 		// When request is finished, parse the body and check the login details against storage
 		req.on('end', () => {
 			const { username, password, isRegister, bypass }: LoginDetails = JSON.parse(body)
-			console.log('username', username)
-			console.log('password', password)
             const storage: any[] = JSON.parse(fs.readFileSync('./storage.json', 'utf-8'))
             res.setHeader('Content-Type', 'application/json')
 			res.setHeader('Access-Control-Allow-Origin', '*')
