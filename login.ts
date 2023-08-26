@@ -34,7 +34,7 @@ export function loginListener(req: http.IncomingMessage, res: http.ServerRespons
                     res.statusCode = 409
                     res.end(JSON.stringify({ message: 'Username already exists' }))
                 } else {
-                    storage.push({ username, password })
+                    storage.push({ username, password, userData: {} })
                     fs.writeFileSync('./storage.json', JSON.stringify(storage))
                     res.statusCode = 200
 					res.end(JSON.stringify({ message: 'Login successful' }))
