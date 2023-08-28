@@ -9,7 +9,6 @@ interface LoginDetails {
 }
 
 export function loginListener(req: http.IncomingMessage, res: http.ServerResponse<http.IncomingMessage> & { req: http.IncomingMessage }) {
-	console.log(req.method)
 	if (req.method === 'POST') {
 		// Get the body of the request
 		let body = ''

@@ -17,8 +17,6 @@ function loginListener(req, res) {
         // When request is finished, parse the body and check the login details against storage
         req.on('end', () => {
             const { username, password, isRegister, bypass } = JSON.parse(body);
-            console.log('username', username);
-            console.log('password', password);
             const storage = JSON.parse(fs_1.default.readFileSync('./storage.json', 'utf-8'));
             res.setHeader('Content-Type', 'application/json');
             res.setHeader('Access-Control-Allow-Origin', '*');
@@ -30,7 +28,7 @@ function loginListener(req, res) {
                     res.end(JSON.stringify({ message: 'Username already exists' }));
                 }
                 else {
-                    storage.push({ username, password });
+                    storage.push({ username, password, userData: {} });
                     fs_1.default.writeFileSync('./storage.json', JSON.stringify(storage));
                     res.statusCode = 200;
                     res.end(JSON.stringify({ message: 'Login successful' }));
