@@ -15,11 +15,16 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const http_1 = __importDefault(require("http"));
 const config_1 = require("./config");
 const login_1 = require("./login");
+const leaderboard_1 = require("./leaderboard");
 const server = http_1.default.createServer((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     console.log('responding');
     if (req.url === '/login') {
         console.log('login');
         (0, login_1.loginListener)(req, res);
+    }
+    else if (req.url === '/leaderboard') {
+        console.log('leaderboard');
+        (0, leaderboard_1.leaderboardListener)(req, res);
     }
 }));
 server.listen(config_1.port, config_1.host, () => {

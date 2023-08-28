@@ -6,7 +6,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.loginListener = void 0;
 const fs_1 = __importDefault(require("fs"));
 function loginListener(req, res) {
-    console.log(req.method);
     if (req.method === 'POST') {
         // Get the body of the request
         let body = '';
@@ -17,7 +16,7 @@ function loginListener(req, res) {
         // When request is finished, parse the body and check the login details against storage
         req.on('end', () => {
             const { username, password, isRegister, bypass } = JSON.parse(body);
-            const storage = JSON.parse(fs_1.default.readFileSync('./storage.json', 'utf-8'));
+            const storage = JSON.parse(fs_1.default.readFileSync('./login.json', 'utf-8'));
             res.setHeader('Content-Type', 'application/json');
             res.setHeader('Access-Control-Allow-Origin', '*');
             if (isRegister) {
@@ -29,7 +28,7 @@ function loginListener(req, res) {
                 }
                 else {
                     storage.push({ username, password, userData: {} });
-                    fs_1.default.writeFileSync('./storage.json', JSON.stringify(storage));
+                    fs_1.default.writeFileSync('./login.json', JSON.stringify(storage));
                     res.statusCode = 200;
                     res.end(JSON.stringify({ message: 'Login successful' }));
                 }

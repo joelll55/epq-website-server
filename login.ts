@@ -1,7 +1,7 @@
 import http from 'http'
 import fs from 'fs'
 
-interface LoginDetails {
+interface ILoginDetails {
 	username: string
 	password: string
 	isRegister: boolean
@@ -19,8 +19,8 @@ export function loginListener(req: http.IncomingMessage, res: http.ServerRespons
 
 		// When request is finished, parse the body and check the login details against storage
 		req.on('end', () => {
-			const { username, password, isRegister, bypass }: LoginDetails = JSON.parse(body)
-            const storage: any[] = JSON.parse(fs.readFileSync('./storage.json', 'utf-8'))
+			const { username, password, isRegister, bypass }: ILoginDetails = JSON.parse(body)
+            const storage: any[] = JSON.parse(fs.readFileSync('./login.json', 'utf-8'))
             res.setHeader('Content-Type', 'application/json')
 			res.setHeader('Access-Control-Allow-Origin', '*')
 
@@ -32,7 +32,7 @@ export function loginListener(req: http.IncomingMessage, res: http.ServerRespons
                     res.end(JSON.stringify({ message: 'Username already exists' }))
                 } else {
                     storage.push({ username, password, userData: {} })
-                    fs.writeFileSync('./storage.json', JSON.stringify(storage))
+                    fs.writeFileSync('./login.json', JSON.stringify(storage))
                     res.statusCode = 200
 					res.end(JSON.stringify({ message: 'Login successful' }))
                 }
